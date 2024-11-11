@@ -1,2 +1,5 @@
-Use this file to submit the extra credit problem. Be sure to describe your
-process for solving the problem, and not just to give the solution. 
+Decoded Message:
+“I wish it need not have happened in my time,” said Frodo.
+“So do I,” said Gandalf, “and so do all who live to see such times. But that is not for them to decide. All we have to decide is what to do with the time that is given us.”
+Description:
+To decode, I determined that a Caesar Cipher with a shift of 3 was used. Shifting each letter in the encoded text backwards by 3 positions revealed the original message.
