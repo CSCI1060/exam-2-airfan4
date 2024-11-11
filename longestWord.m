@@ -1,16 +1,35 @@
-function [result] = longestWord( inputFile )
-%
-% inputFile specifies the file whose characters should
-% be analyzed.
-%
-% Periods, commas, apostrophes, and other punctuation
-% marks DO NOT count towards the length of a word.
-% For example, in the sentence “The quick red fox
-% jumped over the lazy brown dog.” the last word is
-% considered to have a length of three (ignoring the
-% period).
-%
-% If inputFile cannot be opened, the function will
-% print a descriptive error message and return the
-% value -1.
-%
+function [result] = longestWord(inputFile)
+    fid = fopen(inputFile, 'r');
+    
+    if fid == -1
+        fprintf('Error: Unable to open the file.\n');
+        result = -1;
+        return;
+    end
+    
+    longestStreak = 0;
+    streak = 0;
+    
+    punctuationMarks = ['.', ',', '!', '?', ' '];
+    
+    while ~feof(fid)
+        inputChar = fread(fid, 1, '*char');
+        
+        if ismember(inputChar, punctuationMarks)
+            if streak > longestStreak
+                longestStreak = streak;
+            end
+            streak = 0;
+        else
+            streak = streak + 1;
+        end
+    end
+    
+    if streak > longestStreak
+        longestStreak = streak;
+    end
+    
+    fclose(fid);
+    
+    result = longestStreak;
+end
